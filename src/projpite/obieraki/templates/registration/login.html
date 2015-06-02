@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8"> 
+		<title>Elective subjects</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+		<link rel="stylesheet" href="{% static 'css/navi.css' %}" type="text/css" />
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+				<script>
+					$(document).ready(function() {
+						$(".toggle").on("change", function(e) {
+							var $inp = $(this).siblings(".select");
+							if(this.checked) {
+								$inp.show();
+							}
+							else {
+								$inp.hide();
+							}
+						});
+					});
+				</script>
+				<script>
+				$(document).ready(function() {
+					$('#example').dataTable();
+				} );
+				</script>
+	</head>
+
+	<body>
+		<header class="navbar-fixed-top" role="banner" style="background-color:white">
+			<div class="container">
+	
+				<div class="masthead">
+				<h3 class="text-muted">Elective subjects</h3>
+
+					<div class="container">
+						<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+							<div class="container">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									</button>
+									<a class="navbar-brand" href="">Homepage</a>
+								</div>
+								<div class="navbar-collapse collapse">
+									<ul class="nav navbar-nav">
+									<li><a href="/courses/">Courses</a></li>
+									<li>{% if user.is_authenticated %}Logged User: <b>{{user.name}}</b> {% else %}<a href="/login/">Log in</a>{% endif %}</li>
+									<li>{% if user.is_authenticated %}<a href="/logout/">Log out</a>{% else %}<a href="/register/">Register</a>{% endif %}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+			
+				</div>	
+			</div>		
+		</header>
+		<br />
+		<br />
+
+		<center>
+			<br /> <br /> <br />
+<h2>Log in to elective subjects database</h2>
+<p>
+<div style="margin-left:35%;margin-right:35%;">
+<fieldset>
+    <form method="post" action=".">{% csrf_token %}
+    <div style="text-align:left";>{{ form.as_p }}</div>
+    <input type="hidden" name="next" value="/src/user_information.html" />
+    <input type="submit" value="Log in"/>    <input type="reset" value="Reset"/>
+  </form>
+</fieldset>
+</div>
+
+		</center> 
+
+
+		<center>
+			<footer class="navbar-fixed-bottom" style="background-color:white">
+				<p>&copy; 2015 PiTE</p>
+	  		</footer>
+		</center>
+		
+	
+	</body>
+</html>
