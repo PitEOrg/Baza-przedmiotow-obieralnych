@@ -52,8 +52,13 @@
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 									<li><a href="/courses/">Courses</a></li>
-									<li>{% if user.is_authenticated %}Logged User: <b>{{user.name}}</b> {% else %}<a href="/login/">Log in</a>{% endif %}</li>
-									<li>{% if user.is_authenticated %}<a href="/logout/">Log out</a>{% else %}<a href="/register/">Register</a>{% endif %}</li>
+									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
+									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
+									{% if user.is_authenticated %}<li>Logged User: <b>{{user.name}}</b></li>{% endif %}
+									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
+									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
+									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
+
 									</ul>
 								</div>
 							</div>
@@ -66,19 +71,16 @@
 		</header>
 		<br />
 		<br />
-		
-		
-		<center>
-			<h2>List of courses:</h2>
-		</center>
+
+		<div class="jumbotron">
+			<h2>COURSES</h2>
+		 </div>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Name</th>
 					<th>ECTS</th>
-					<th>Hours</th>
 					<th>Min students</th>
 	                <th>Max students</th>
 	                <th>Semester</th>
@@ -86,12 +88,10 @@
 	            </tr>
 	        </thead>
 			<tbody>
-				{% for ID_NO in courses %}
+				{% for pk in courses %}
 					<tr>
-						<td>{{ courses.ID_NO }}</td>
 						<td>{{ courses.Name }}</td>
 						<td>{{ courses.ECTS }}</td>
-						<td>{{ courses.Hours }}</td>
 						<td>{{ courses.MinStudents }}</td>
 						<td>{{ courses.MaxStudents }}</td>
 						<td>{{ courses.Semester }}</td>
@@ -101,8 +101,6 @@
 			</tbody>
 		</table>
 
-		
-		
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">
 				<p>&copy; 2015 PiTE</p>
@@ -112,3 +110,4 @@
 	
 	</body>
 </html>
+

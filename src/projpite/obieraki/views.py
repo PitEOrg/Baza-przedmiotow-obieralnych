@@ -13,12 +13,18 @@ from obieraki.forms import RegisterForm
 def main_site(request):
 	return render(request, 'src/index.html', {})
 
+def account_info(request):
+	return render(request, 'src/account_info.html', {})
+
+def courses(request):
+	return render(request, 'src/courses.html', {})
+
+def mycourses(request):
+	return render(request, 'src/mycourses.html', {})
+
 def logout_page(request):
     logout(request)
     return render(request, "src/index.html", {})
-
-def user_information(request):
-    return render(request, "src/user_information.html", {})
 
 def register_page(request):
 	if request.method =='POST':
