@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #Create your models here.
 # Zakomentowane zostaly elementy ktore przy odbiorze projektu uznano za niepotrzebne
@@ -17,7 +18,8 @@ class User_2(models.Model):
     
     
 class Student(models.Model):
-    User_2_idUser_2 = models.ForeignKey(User_2)
+    user = models.ForeignKey(User, blank=True, null=True)
+    #User_2_idUser_2 = models.ForeignKey(User_2)
     Name = models.TextField()
     Surname = models.TextField()
     FieldOfStudy = models.TextField()
@@ -29,7 +31,8 @@ class Student(models.Model):
 
 
 class Staff(models.Model):
-    User_2_idUser_2 = models.ForeignKey(User_2)
+    user = models.ForeignKey(User, blank=True, null=True)
+    #User_2_idUser_2 = models.ForeignKey(User_2)
     Name = models.TextField()
     Surname = models.TextField()
     Title = models.TextField()

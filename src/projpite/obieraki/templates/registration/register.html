@@ -54,7 +54,7 @@
 									<li><a href="/courses/">Courses</a></li>
 									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
 									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
-									{% if user.is_authenticated %}<li>Logged User: <b>{{user.name}}</b></li>{% endif %}
+									{% if user.is_authenticated %}<li>Logged User: <b>{{user.username}}</b></li>{% endif %}
 									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
 									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
 									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
