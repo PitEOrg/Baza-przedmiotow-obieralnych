@@ -52,13 +52,10 @@
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 									<li><a href="/courses/">Courses</a></li>
-									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
-									{% if user.is_authenticated %}<li>Logged User: <b>{{user.name}}</b></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
-
+									<li><a href="/mycourses/">My Courses</a></li>
+									<li><a href="/account/">Account Information</a></li>
+									<li><a href="">Logged User: {{student.Name}} {{student.Surname}}</a></li>
+									<li><a href="/logout/">Log out</a></li>
 									</ul>
 								</div>
 							</div>
@@ -74,6 +71,9 @@
 
 		<div class="jumbotron">
 			<h2>MY COURSES</h2>
+			{% for course in courses %}
+			<h4><a href="{% url 'course_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
+        		{% endfor %}
 		 </div>
 
 		

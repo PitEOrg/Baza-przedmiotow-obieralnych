@@ -52,13 +52,10 @@
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 									<li><a href="/courses/">Courses</a></li>
-									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
-									{% if user.is_authenticated %}<li>Logged User: <b>{{user.username}}</b></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
-
+									<li><a href="/mycourses/">My Courses</a></li>
+									<li><a href="/account/">Account Information</a></li>
+									<li><a href="">Logged User: {{student.Name}} {{student.Surname}}</a></li>
+									<li><a href="/logout/">Log out</a></li>
 									</ul>
 								</div>
 							</div>
@@ -73,7 +70,14 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>Elective subjects</h2>
+			<h2>ACCOUNT INFORMATION</h2>
+			<h3>Imię: {{student.Name}}</h3>
+			<h3>Nazwisko: {{student.Surname}}</h3>
+			<h3>Email: {{student.Mail}}</h3>
+			<h3>Kierunek: {{student.FieldOfStudy}}</h3>
+			<h3>Rok: {{student.Year_2}}</h3>
+			<h3>Semestr: {{student.Semester}}</h3>
+			<h3>Zebrane ECTS: {{student.CollectedECTS}}</h3>
 		 </div>
 
 		

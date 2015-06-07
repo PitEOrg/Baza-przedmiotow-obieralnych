@@ -52,12 +52,8 @@
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 									<li><a href="/courses/">Courses</a></li>
-									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
-									{% if user.is_authenticated %}<li>Logged User: <b>{{user.name}}</b></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
+									<li><a href="/login/">Log in</a></li>
+									<li><a href="/register/">Register</a></li>
 
 									</ul>
 								</div>
@@ -73,32 +69,21 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>ACCOUNT_INFO</h2>
-			if student
+			<h2>Name: {{ course.Name }}</h2>
+			<h4>ECTS: {{ course.ECTS }}</h4>
+			<h4>MinStudents: {{ course.MinStudents }}</h4>
+			<h4>MaxStudents: {{ course.MaxStudents }}</h4>
+			<h4>Semestr: {{ course.Semester }}</h4>
+			<h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</h4>
+			<h4>Opis: {{ course.Description }}</h4>
+			<h4>Wymagania: {{ course.Requirements }}</h4>
+			<h4>Sposób zaliczenia: {{ course.WayOfGettingCredit }}</h4>
+			<h4>Egzamin: {{ course.Exam }}</h4>
 			<br />
-			Name
-			<br />
-			Surname
-			<br />
-			Mail
-			<br />
-			FieldOfStudy
-			<br />
-			Year_2
-			<br />
-			Semester
-			<br /><br />
-			if staff
-			<br />
-			Name
-			<br />
-			Surname
-			<br />
-			Title
-			<br />
-			Mail
-			<br />
-			Department
+			{% for cl in classes %}
+			<h4>Zajęcia: {{ cl.Class_Type_idClass.Name }} MinStudents: {{ cl.Class_Type_idClass.MinStudents }} MaxStudents: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
+			<h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }} Ilość godzin:{{ cl.Class_Type_idClass.Hours }}</h4>
+        		{% endfor %}
 		 </div>
 
 		
@@ -112,3 +97,4 @@
 	
 	</body>
 </html>
+

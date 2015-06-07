@@ -52,13 +52,10 @@
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 									<li><a href="/courses/">Courses</a></li>
-									{% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
-									{% if user.is_authenticated %}<li>Logged User: <b>{{user.name}}</b></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
-									{% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
-									{% if user.is_authenticated %}{% else %}<li><a href="/register/">Register</a></li>{% endif %}
-
+									<li><a href="/mycourses/">My Courses</a></li>
+									<li><a href="/account/">Account Information</a></li>
+									<li><a href="">Logged User: {{student.Name}} {{student.Surname}}</a></li>
+									<li><a href="/logout/">Log out</a></li>
 									</ul>
 								</div>
 							</div>
@@ -74,8 +71,13 @@
 
 		<div class="jumbotron">
 			<h2>COURSES</h2>
+			<h4>Name    ECTS    MinStudents    MaxStudents    Semester</h4>
+			{% for course in courses %}
+			<h4><a href="{% url 'course_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
+        		{% endfor %}
 		 </div>
 
+<!--
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -88,18 +90,21 @@
 	            </tr>
 	        </thead>
 			<tbody>
-				{% for pk in courses %}
+				{% for course in courses %}
 					<tr>
-						<td>{{ courses.Name }}</td>
-						<td>{{ courses.ECTS }}</td>
-						<td>{{ courses.MinStudents }}</td>
-						<td>{{ courses.MaxStudents }}</td>
-						<td>{{ courses.Semester }}</td>
+						<td>{{ course.Name }}</td>
+						<td>{{ course.ECTS }}</td>
+						<td>{{ course.MinStudents }}</td>
+						<td>{{ course.MaxStudents }}</td>
+						<td>{{ course.Semester }}</td>
 						<td></td>
 		            </tr>
         		{% endfor %}
 			</tbody>
 		</table>
+-->
+
+		
 
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">

@@ -51,9 +51,8 @@
 								</div>
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
-									<li><a href="/courses/">Courses</a></li>
-									<li>{% if user.is_authenticated %}Logged User: <b>{{user.name}}</b> {% else %}<a href="/login/">Log in</a>{% endif %}</li>
-									<li>{% if user.is_authenticated %}<a href="/logout/">Log out</a>{% else %}<a href="/register/">Register</a>{% endif %}</li>
+									<li><a href="">Logged User: {{user.username}}</a></li>
+									<li><a href="/logout/">Log out</a></li>
 									</ul>
 								</div>
 							</div>
@@ -67,22 +66,11 @@
 		<br />
 		<br />
 
-		<center>
-			<br /> <br /> <br />
-<h2>Information about your profile:</h2>
-<p>
-<div style="margin-left:35%;margin-right:35%;">
-<fieldset>
-    <form method="post" action=".">{% csrf_token %}
-    <div style="text-align:left";>{{ form.as_p }}</div>
-    <input type="hidden" name="next" value="/" />
-    <input type="submit" value="###"/>    <input type="reset" value="###"/>
-  </form>
-</fieldset>
-</div>
+		<div class="jumbotron">
+			<h2>Twoje konto nauczyciela nie zostało jeszcze zatwierdzone przez administratora.</h2>
+		 </div>
 
-		</center> 
-
+		
 
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">
@@ -93,3 +81,4 @@
 	
 	</body>
 </html>
+

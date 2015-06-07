@@ -6,15 +6,15 @@ from django.contrib.auth.models import User
 # W razie koniecznosci mozna je przywrocic do dzialania
 # TO DO: Mozliwosc stworzenia studenta bez stworzonego jeszcze konta dla niego
 
-class User_2(models.Model):
-    Login = models.TextField(unique=True)
-    Password_2 = models.TextField()
-    Mail = models.TextField(unique=True)
-    Permission = models.IntegerField()
-    #Name = models.TextField()
-    #Surname = models.TextField()
-    def __str__(self):
-        return self.Mail
+class User_2(models.Model): 							#delete
+    Login = models.TextField(unique=True)				#delete
+    Password_2 = models.TextField()					#delete
+    Mail = models.TextField(unique=True)				#delete
+    Permission = models.IntegerField()					#delete
+    #Name = models.TextField()						#delete
+    #Surname = models.TextField()						#delete
+    def __str__(self):								#delete
+        return self.Mail								#delete
     
     
 class Student(models.Model):
@@ -22,8 +22,9 @@ class Student(models.Model):
     #User_2_idUser_2 = models.ForeignKey(User_2)
     Name = models.TextField()
     Surname = models.TextField()
-    FieldOfStudy = models.TextField()
-    Year_2 = models.IntegerField()
+    Mail = models.TextField()							#unique
+    FieldOfStudy = models.TextField()					#add wydzial
+    Year_2 = models.IntegerField()						#zmiana nazwy
     Semester = models.IntegerField()
     CollectedECTS = models.IntegerField()
     def __str__(self):
@@ -35,6 +36,7 @@ class Staff(models.Model):
     #User_2_idUser_2 = models.ForeignKey(User_2)
     Name = models.TextField()
     Surname = models.TextField()
+    Mail = models.TextField()							#unique
     Title = models.TextField()
     Department = models.TextField()
     def __str__(self):
@@ -51,7 +53,7 @@ class Course(models.Model):
     Desription = models.TextField()
     Requirements = models.TextField()
     WayOfGettingCredit = models.TextField()
-    Requirements = models.TextField()
+    Requirements = models.TextField()					#delete
     Exam = models.BooleanField()
     #Hours = models.IntegerField()
     #ID_NO = models.IntegerField()
