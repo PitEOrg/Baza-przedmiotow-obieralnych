@@ -72,7 +72,7 @@
 		<div class="jumbotron">
 			<h2>MY COURSES</h2>
 			{% for course in courses %}
-			<h4><a href="{% url 'course_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
+			<h4><a href="{% url 'mycourse_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
         		{% endfor %}
 		 </div>
 

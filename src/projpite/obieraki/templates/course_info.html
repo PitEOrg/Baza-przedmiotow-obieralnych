@@ -82,7 +82,7 @@
 			<br />
 			{% for cl in classes %}
 			<h4>Zajęcia: {{ cl.Class_Type_idClass.Name }} MinStudents: {{ cl.Class_Type_idClass.MinStudents }} MaxStudents: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
-			<h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }} Ilość godzin:{{ cl.Class_Type_idClass.Hours }}</h4>
+			<h4>Prowadzący: {{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff.Name }} {{ cl.Staff_idStaff.Surname }} Ilość godzin:{{ cl.Hours }}</h4>
         		{% endfor %}
 		 </div>
 

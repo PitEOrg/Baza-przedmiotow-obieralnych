@@ -79,11 +79,105 @@ def mycourses(request):
 		elif	request.user.groups.filter(name='Staff').exists():
 			try:
 				st = Staff.objects.get(user=request.user)
-				return render(request, 'Staff/mycourses.html', {'staff': st})
+				courses = (courses for courses in Course.objects.filter(Staff_idStaff = st.id))
+				return render(request, 'Staff/mycourses.html', {'staff': st, 'courses': courses})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
 	else:
 		return render(request, '404.html', {})
+
+def class_add(request, course_id, class_id):
+	course = Course.objects.get(pk=course_id)
+	class_ = Class.objects.get(pk=class_id)
+	class_type = Class_Type.objects.get(pk=class_.Class_Type_idClass.id)
+	if request.user.is_authenticated():
+		if request.user.groups.filter(name='Student').exists():
+			try:
+				st = Student.objects.get(user=request.user)
+				try:
+					old_course = Student_has_Course.objects.get(Student_idStudent=st, Course_idCourse=course)
+				except Student_has_Course.DoesNotExist:
+					new_course = Student_has_Course(Student_idStudent=st, Course_idCourse=course)
+					new_course.save()
+					st.CollectedECTS += course.ECTS
+					st.save()
+				try:
+					old_class = Student_has_Class.objects.get(Student_idStudent=st, Class_Course_idCourse=course, Class_Class_Type_idClass=class_type)
+				except Student_has_Class.DoesNotExist:
+					new_class = Student_has_Class(Student_idStudent=st, Class_Course_idCourse=course, Class_Class_Type_idClass=class_type)
+					new_class.save()
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+			except Student.DoesNotExist:
+				return render(request, '404.html', {})
+		else:
+			return render(request, '404.html', {})
+	else:
+		return render(request, '404.html', {})
+
+def class_remove(request, course_id, class_id):
+	course = Course.objects.get(pk=course_id)
+	class_ = Class.objects.get(pk=class_id)
+	class_type = Class_Type.objects.get(pk=class_.Class_Type_idClass.id)
+	if request.user.is_authenticated():
+		if request.user.groups.filter(name='Student').exists():
+			try:
+				st = Student.objects.get(user=request.user)
+				try:
+					old_class = Student_has_Class.objects.get(Student_idStudent=st, Class_Course_idCourse=course, Class_Class_Type_idClass=class_type)
+					old_class.delete()
+					try:
+						other_classes = Student_has_Class.objects.get(Student_idStudent=st, Class_Course_idCourse=course)
+					except Student_has_Class.MultipleObjectsReturned:
+						other_classes = []
+					except Student_has_Class.DoesNotExist:
+						try:
+							old_course = Student_has_Course.objects.get(Student_idStudent=st, Course_idCourse=course)
+							old_course.delete()
+							st.CollectedECTS -= course.ECTS
+							st.save()
+						except Student_has_Course.DoesNotExist:
+							new_course = Student_has_Course(Student_idStudent=st, Course_idCourse=course)
+				except Student_has_Class.DoesNotExist:
+					new_class = Student_has_Class(Student_idStudent=st, Class_Course_idCourse=course, Class_Class_Type_idClass=class_type)
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+			except Student.DoesNotExist:
+				return render(request, '404.html', {})
+		else:
+			return render(request, '404.html', {})
+	else:
+		return render(request, '404.html', {})
+
+def mycourse_info(request, course_id):
+	course = Course.objects.get(pk=course_id)
+	if request.user.is_authenticated():
+		if request.user.groups.filter(name='Student').exists():
+			try:
+				st = Student.objects.get(user=request.user)
+				classes_types = (has_classes.Class_Class_Type_idClass for has_classes in Student_has_Class.objects.filter(Student_idStudent=st, Class_Course_idCourse = course))
+				classes = Class.objects.all()
+				chosen_classes = []
+				for i in classes_types:
+					new_class = Class.objects.get(Class_Type_idClass = i, Course_idCourse = course_id)
+					chosen_classes.append(new_class.id)
+				classes = classes.filter(pk__in=chosen_classes)
+				return render(request, 'Student/course_info.html', {'student': st, 'course': course, 'classes': classes})
+			except Student.DoesNotExist:
+				return render(request, '404.html', {})
+		elif	request.user.groups.filter(name='Staff').exists():
+			try:
+				st = Staff.objects.get(user=request.user)
+				classes = (classes for classes in Class.objects.filter(Course_idCourse = course_id))
+				if request.method == 'POST':
+					course.Description = request.POST['Description']
+					course.Requirements = request.POST['Requirements']
+					course.WayOfGettingCredit = request.POST['WayOfGettingCredit']
+					course.save()
+				return render(request, 'Staff/course_info.html', {'staff': st, 'course': course, 'classes': classes})
+			except Staff.DoesNotExist:
+				return render(request, '404.html', {})
+	else:
+		classes = (classes for classes in Class.objects.filter(Course_idCourse = course_id))
+		return render(request, 'course_info.html', {'course': course, 'classes': classes})
 
 def course_info(request, course_id):
 	course = Course.objects.get(pk=course_id)
@@ -98,6 +192,11 @@ def course_info(request, course_id):
 		elif	request.user.groups.filter(name='Staff').exists():
 			try:
 				st = Staff.objects.get(user=request.user)
+				if request.method == 'POST':
+					course.Description = request.POST['Description']
+					course.Requirements = request.POST['Requirements']
+					course.WayOfGettingCredit = request.POST['WayOfGettingCredit']
+					course.save()
 				return render(request, 'Staff/course_info.html', {'staff': st, 'course': course, 'classes': classes})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
