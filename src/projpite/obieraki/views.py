@@ -27,6 +27,8 @@ def main_site(request):
 				return render(request, 'Staff/index_staff.html', {'staff': st})
 			except Staff.DoesNotExist:
 				return render(request, 'Staff/index_staff_no_acc.html', {})
+		elif request.user.groups.filter(name='Admin').exists():
+			return render(request, 'Admin/index_admin.html', {})
 		else:
 			return render(request, 'no_acc/index_no_acc.html', {})
 	else:
