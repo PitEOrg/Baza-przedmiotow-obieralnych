@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^mycourses/$', mycourses),
     url(r'^register/$', register_page),
     url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$',logout_page)
+    url(r'^logout/$',logout_page),
+    url(r'^add/$',add)
+
 ]

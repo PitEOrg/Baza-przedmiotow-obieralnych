@@ -6,7 +6,7 @@ from django.template import RequestContext
 from obieraki.models import *
 from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
-from obieraki.forms import RegisterForm
+from obieraki.forms import *
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
@@ -15,7 +15,11 @@ from django.contrib.auth.models import Group
 
 def main_site(request):
 	if request.user.is_authenticated():
-		if request.user.groups.filter(name='Student').exists():
+		if request.user.username == 'admin':
+			form = ChooseForm()
+			return render(request, 'admin/index_admin.html',{})
+
+		elif request.user.groups.filter(name='Student').exists():
 			try:
 				st = Student.objects.get(user=request.user)
 				return render(request, 'Student/index_student.html', {'student': st})
@@ -130,3 +134,35 @@ def register_page(request):
     return render(request, "registration/register.html", {'form': form,})
 
 
+def add(request):
+	if request.method == 'POST':
+		form = ClassForm(request.POST)
+		if form.is_valid():
+			new_course= form.save()
+			return HttpResponseRedirect("/")
+
+
+
+
+
+
+
+		else:
+			form = ChooseForm(request.POST)
+			if form.is_valid():
+				mhm = request.POST['Dodaj']
+				form = formFactory(mhm)
+	else:
+		form = ChooseForm()
+	return render(request, 'admin/add.html', {'form': form})
+
+
+"""
+	form = CourseForm(request.POST)
+        	if form.is_valid():
+            		cd = form.cleaned_data
+            		f = CourseForm(request.POST)
+            		new_course= f.save()
+            		return HttpResponseRedirect("/")
+
+"""
