@@ -1,5 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
+
 <html lang="pl">
 	<head>
 		<meta charset="UTF-8"> 
@@ -31,9 +32,73 @@
 	</head>
 
 	<body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Elective subjects</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="/index/">Homepage</a></li>
+                        <li><a href="/courses/">Courses</a></li>
+                        <li><a href="/login/">Log in</a></li>
+                        <li><a href="/register/">Register</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <h2>Elective subjects</h2>
+                </div>
+
+                <center>
+                    <footer class="navbar-fixed-bottom" style="background-color:white">
+                        &copy; 2015 PiTE
+                    </footer>
+                </center>
+
+            </div>
+        </div>
+
+	</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<title>Elective subjects</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+		<link rel="stylesheet" href="{% static 'css/navi.css' %}" type="text/css" />
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+				<script>
+					$(document).ready(function() {
+						$(".toggle").on("change", function(e) {
+							var $inp = $(this).siblings(".select");
+							if(this.checked) {
+								$inp.show();
+							}
+							else {
+								$inp.hide();
+							}
+						});
+					});
+				</script>
+				<script>
+				$(document).ready(function() {
+					$('#example').dataTable();
+				} );
+				</script>
+	</head>
+
+	<body>
 		<header class="navbar-fixed-top" role="banner" style="background-color:white">
 			<div class="container">
-	
+
 				<div class="masthead">
 				<h3 class="text-muted">Elective subjects</h3>
 
@@ -61,9 +126,9 @@
 						</div>
 
 					</div>
-			
-				</div>	
-			</div>		
+
+				</div>
+			</div>
 		</header>
 		<br />
 		<br />
@@ -72,15 +137,17 @@
 			<h2>Elective subjects</h2>
 		 </div>
 
-		
+
 
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">
 				<p>&copy; 2015 PiTE</p>
 	  		</footer>
 		</center>
-		
-	
+
+
 	</body>
 </html>
 
+
+-->

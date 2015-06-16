@@ -30,10 +30,56 @@
 				</script>
 	</head>
 
-	<body>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Elective subjects</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/index/">Homepage</a></li>
+                        <li class="active"><a href="/courses/">Courses</a></li>
+                        <li><a href="/login/">Log in</a></li>
+                        <li><a href="/register/">Register</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <h2>Name: {{ course.Name }}</h2>
+                    <h4>ECTS: {{ course.ECTS }}</h4>
+                    <h4>MinStudents: {{ course.MinStudents }}</h4>
+                    <h4>MaxStudents: {{ course.MaxStudents }}</h4>
+                    <h4>Semestr: {{ course.Semester }}</h4>
+                    <h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</h4>
+                    <h4>Opis: {{ course.Description }}</h4>
+                    <h4>Wymagania: {{ course.Requirements }}</h4>
+                    <h4>Sposób zaliczenia: {{ course.WayOfGettingCredit }}</h4>
+                    <h4>Egzamin: {{ course.Exam }}</h4>
+                    <br />
+                    {% for cl in classes %}
+                        <h4>Zajęcia: {{ cl.Class_Type_idClass.Name }} MinStudents: {{ cl.Class_Type_idClass.MinStudents }} MaxStudents: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
+                        <h4>Prowadzący: {{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff.Name }} {{ cl.Staff_idStaff.Surname }} Liczba godzin:{{ cl.Hours }}</h4>
+                    {% endfor %}
+                    <br />
+                </div>
+                <center>
+                    <footer class="navbar-fixed-bottom" style="background-color:white">
+                        &copy; 2015 PiTE
+                    </footer>
+                </center>
+
+            </div>
+        </div>
+
+	</body>
+</html>
+
+<!--
+<body>
 		<header class="navbar-fixed-top" role="banner" style="background-color:white">
 			<div class="container">
-	
+
 				<div class="masthead">
 				<h3 class="text-muted">Elective subjects</h3>
 
@@ -61,9 +107,9 @@
 						</div>
 
 					</div>
-			
-				</div>	
-			</div>		
+
+				</div>
+			</div>
 		</header>
 		<br />
 		<br />
@@ -86,15 +132,15 @@
         		{% endfor %}
 		 </div>
 
-		
+
 
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">
 				<p>&copy; 2015 PiTE</p>
 	  		</footer>
 		</center>
-		
-	
-	</body>
-</html>
 
+
+	</body>
+
+	-->

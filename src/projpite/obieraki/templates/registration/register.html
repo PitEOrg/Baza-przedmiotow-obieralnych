@@ -30,10 +30,57 @@
 				</script>
 	</head>
 
-	<body>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Elective subjects</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/index/">Homepage</a></li>
+                        <li><a href="/courses/">Courses</a></li>
+                        {% if user.is_authenticated %}<li><a href="/mycourses/">My Courses</a></li>{% endif %}
+                        {% if user.is_authenticated %}<li><a href="/account/">Account Information</a></li>{% endif %}
+                        {% if user.is_authenticated %}<li>Logged User: <b>{{user.username}}</b></li>{% endif %}
+                        {% if user.is_authenticated %}{% else %}<li><a href="/login/">Log in</a></li>{% endif %}
+                        {% if user.is_authenticated %}<li><a href="/logout/">Log out</a></li>{% endif %}
+                        {% if user.is_authenticated %}{% else %}<li class="active"><a href="/register/">Register</a></li>{% endif %}
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <h2>Registration form to the database elective subjects</h2>
+                    <div style="margin-left:35%;margin-right:35%;">
+                        <fieldset>
+                            <legend> All fields must be filled</legend>
+                            <form method="post" action=".">{% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Register">    <input type="reset" value="Reset">
+                            </form>
+                        </fieldset>
+			        </div>
+                </div>
+
+                <center>
+                    <footer class="navbar-fixed-bottom" style="background-color:white">
+                        &copy; 2015 PiTE
+                    </footer>
+                </center>
+
+            </div>
+        </div>
+
+	</body>
+
+</html>
+
+<!--
+
+<body>
 		<header class="navbar-fixed-top" role="banner" style="background-color:white">
 			<div class="container">
-	
+
 				<div class="masthead">
 				<h3 class="text-muted">Elective subjects</h3>
 
@@ -64,9 +111,9 @@
 						</div>
 
 					</div>
-			
-				</div>	
-			</div>		
+
+				</div>
+			</div>
 		</header>
 		<br />
 		<br />
@@ -86,7 +133,7 @@
 			</div>
 		</center>
 
-		</center> 
+		</center>
 
 
 		<center>
@@ -94,7 +141,8 @@
 				<p>&copy; 2015 PiTE</p>
 	  		</footer>
 		</center>
-		
-	
+
+
 	</body>
-</html>
+
+	-->

@@ -30,10 +30,50 @@
 				</script>
 	</head>
 
-	<body>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Elective subjects</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/index/">Homepage</a></li>
+                        <li class="active"><a href="/courses/">Courses</a></li>
+                        <li><a href="/mycourses/">My Courses</a></li>
+                        <li><a href="/account/">Account Information</a></li>
+                        <li><a href="">Logged User: {{staff.Title}} {{staff.Name}} {{staff.Surname}}</a></li>
+                        <li><a href="/logout/">Log out</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <h2>COURSES</h2>
+                    <h4>Name    ECTS    MinStudents    MaxStudents    Semester</h4>
+                    {% for course in courses %}
+                        <h4><a href="{% url 'course_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
+                    {% endfor %}
+                </div>
+
+                <center>
+                    <footer class="navbar-fixed-bottom" style="background-color:white">
+                        &copy; 2015 PiTE
+                    </footer>
+                </center>
+
+            </div>
+        </div>
+
+	</body>
+
+</html>
+
+<!--
+
+<body>
 		<header class="navbar-fixed-top" role="banner" style="background-color:white">
 			<div class="container">
-	
+
 				<div class="masthead">
 				<h3 class="text-muted">Elective subjects</h3>
 
@@ -62,9 +102,9 @@
 						</div>
 
 					</div>
-			
-				</div>	
-			</div>		
+
+				</div>
+			</div>
 		</header>
 		<br />
 		<br />
@@ -102,17 +142,17 @@
         		{% endfor %}
 			</tbody>
 		</table>
--->
+->
 
-		
+
 
 		<center>
 			<footer class="navbar-fixed-bottom" style="background-color:white">
 				<p>&copy; 2015 PiTE</p>
 	  		</footer>
 		</center>
-		
-	
-	</body>
-</html>
 
+
+	</body>
+
+-->
