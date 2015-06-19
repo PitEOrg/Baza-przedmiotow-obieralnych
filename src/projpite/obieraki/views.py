@@ -16,7 +16,6 @@ from django.contrib.auth.models import Group
 def main_site(request):
 	if request.user.is_authenticated():
 		if request.user.username == 'admin':
-			form = ChooseForm()
 			return render(request, 'admin/index_admin.html',{})
 
 		elif request.user.groups.filter(name='Student').exists():
@@ -135,6 +134,63 @@ def register_page(request):
 
 
 def add(request):
+	if request.user.username != 'admin':
+		return render(request, '404.html', {})
+
+	if request.method == 'POST':
+		#nie znalazlem ladniejszego sposobu na sprawdzenie
+		#ktora forma zostala wyslana niz drabinka ifow
+		form = ClassForm(request.POST)
+		if form.is_valid():
+			new_object= form.save()
+			return HttpResponseRedirect("/")
+		form = StudentForm(request.POST)
+		if form.is_valid():
+			new_object= form.save()
+			return HttpResponseRedirect("/")
+		form = StaffForm(request.POST)
+		if form.is_valid():
+			new_object= form.save()
+			return HttpResponseRedirect("/")
+		form = CourseForm(request.POST)
+		if form.is_valid():
+			new_object= form.save()
+			return HttpResponseRedirect("/")
+		form = ChooseForm(request.POST)
+		if form.is_valid():
+			mhm = request.POST['Dodaj']
+			form = formFactory(mhm)
+	else:
+		form = ChooseForm()
+	return render(request, 'admin/add.html', {'form': form})
+
+
+"""
+	form = CourseForm(request.POST)
+        	if form.is_valid():
+            		cd = form.cleaned_data
+            		f = CourseForm(request.POST)
+            		new_course= f.save()
+            		return HttpResponseRedirect("/")
+
+"""
+
+
+
+def delete(request):
+	
+	if request.method == 'POST':
+		form = YourForm(request.POST)
+		if form.is_valid():
+
+			instance = Student.objects.get(id=request.POST['field1'])
+			instance.delete()
+	formStudent = DeleteStudentForm
+	formClass = DeleteClassForm
+	formStaff = DeleteStaffForm
+	formCourse = DeleteCourseForm
+	return render(request, 'admin/remove.html', {'formStudent': formStudent,'formClass': formClass,'formStaff': formStaff,'formCourse': formCourse  })
+"""
 	if request.method == 'POST':
 		form = ClassForm(request.POST)
 		if form.is_valid():
@@ -157,7 +213,7 @@ def add(request):
 	return render(request, 'admin/add.html', {'form': form})
 
 
-"""
+
 	form = CourseForm(request.POST)
         	if form.is_valid():
             		cd = form.cleaned_data
@@ -166,3 +222,48 @@ def add(request):
             		return HttpResponseRedirect("/")
 
 """
+
+
+def deleteStudent(request):
+	
+	if request.method == 'POST':
+		form = DeleteStudentForm(request.POST)
+		if form.is_valid():
+			instance = Student.objects.get(id=request.POST['student'])
+			instance.delete()
+			return HttpResponseRedirect("/delete/")
+	
+	return HttpResponseRedirect("/")
+
+def deleteClass(request):
+	
+	if request.method == 'POST':
+		form = DeleteClassForm(request.POST)
+		if form.is_valid():
+			instance = Class.objects.get(id=request.POST['classOb'])
+			instance.delete()
+			return HttpResponseRedirect("/delete/")
+	
+	return HttpResponseRedirect("/")
+
+def deleteStaff(request):
+	
+	if request.method == 'POST':
+		form = DeleteStaffForm(request.POST)
+		if form.is_valid():
+			instance = Staff.objects.get(id=request.POST['staff'])
+			instance.delete()
+			return HttpResponseRedirect("/delete/")
+	
+	return HttpResponseRedirect("/")
+
+def deleteCourse(request):
+	
+	if request.method == 'POST':
+		form = DeleteCourseForm(request.POST)
+		if form.is_valid():
+			instance = Course.objects.get(id=request.POST['course'])
+			instance.delete()
+			return HttpResponseRedirect("/delete/")
+	
+	return HttpResponseRedirect("/")

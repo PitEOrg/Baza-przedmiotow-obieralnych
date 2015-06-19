@@ -14,6 +14,10 @@ urlpatterns = [
     url(r'^register/$', register_page),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$',logout_page),
-    url(r'^add/$',add)
-
+    url(r'^add/$',add),
+    url(r'^delete/$',delete),
+    url(r'^delete_student/$',deleteStudent),
+	url(r'^delete_class/$',deleteClass),
+	url(r'^delete_course/$',deleteCourse),
+	url(r'^delete_staff/$',deleteStaff)
 ]

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm      
-from django.contrib.auth.models import User   # fill in custom user info then save it 
+from django.contrib.auth.models import User  # fill in custom user info then save it 
 from django.contrib.auth.forms import UserCreationForm     
 from obieraki.models import *
 
@@ -32,35 +32,44 @@ class RegisterForm(UserCreationForm):
 
 
 
-class ParentForm(ModelForm):
+class StudentForm(ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
 
-class StudentForm(ParentForm):
-    class Meta:
-        model = Student
-        fields = '__all__'
-
-class CourseForm(ParentForm):
+class CourseForm(ModelForm):
     class Meta:
         model = Course
         fields = '__all__'
 
-class StaffForm(ParentForm):
+class StaffForm(ModelForm):
     class Meta:
         model = Staff
         fields = '__all__'
 
-class ClassForm(ParentForm):
+class ClassForm(ModelForm):
     class Meta:
         model = Class
         fields = '__all__'
 
 
-class YourForm(forms.Form):
-    field1 = forms.ModelChoiceField(queryset = Student.objects.all(), initial=0 )
+class DeleteStudentForm(forms.Form):
+    student = forms.ModelChoiceField(queryset = Student.objects.all(), initial=0 )
 
+class DeleteClassForm(forms.Form):
+	classOb = forms.ModelChoiceField(queryset = Class.objects.all(), initial=0 )
+class DeleteCourseForm(forms.Form):
+	course = forms.ModelChoiceField(queryset = Course.objects.all(), initial=0 )
+class DeleteStaffForm(forms.Form):
+	staff = forms.ModelChoiceField(queryset = Staff.objects.all(), initial=0 )
+
+
+
+
+class YourForm(forms.Form):
+
+    field1 = forms.ModelChoiceField(queryset = Student.objects.all(), initial=0 )
+    success_url = '/thanks/'
 class ChooseForm(forms.Form):
         OPTIONS = (
                 ("STU", "Student"),
