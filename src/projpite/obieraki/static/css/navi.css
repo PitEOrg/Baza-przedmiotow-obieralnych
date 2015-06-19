@@ -10,7 +10,7 @@ body {
 }
 
 /* Main marketing message and sign up button */
-.jumbotron {
+.jumbotron .btn {
   text-align: center;
   background-color: transparent;
 }
@@ -90,3 +90,4 @@ body {
 .select {
     display: none;
 }
+
