@@ -138,8 +138,7 @@ def add(request):
 		return render(request, '404.html', {})
 
 	if request.method == 'POST':
-		#nie znalazlem ladniejszego sposobu na sprawdzenie
-		#ktora forma zostala wyslana niz drabinka ifow
+
 		form = ClassForm(request.POST)
 		if form.is_valid():
 			new_object= form.save()
@@ -165,15 +164,6 @@ def add(request):
 	return render(request, 'admin/add.html', {'form': form})
 
 
-"""
-	form = CourseForm(request.POST)
-        	if form.is_valid():
-            		cd = form.cleaned_data
-            		f = CourseForm(request.POST)
-            		new_course= f.save()
-            		return HttpResponseRedirect("/")
-
-"""
 
 
 
@@ -190,38 +180,7 @@ def delete(request):
 	formStaff = DeleteStaffForm
 	formCourse = DeleteCourseForm
 	return render(request, 'admin/remove.html', {'formStudent': formStudent,'formClass': formClass,'formStaff': formStaff,'formCourse': formCourse  })
-"""
-	if request.method == 'POST':
-		form = ClassForm(request.POST)
-		if form.is_valid():
-			new_course= form.save()
-			return HttpResponseRedirect("/")
 
-
-
-
-
-
-
-		else:
-			form = ChooseForm(request.POST)
-			if form.is_valid():
-				mhm = request.POST['Dodaj']
-				form = formFactory(mhm)
-	else:
-		form = ChooseForm()
-	return render(request, 'admin/add.html', {'form': form})
-
-
-
-	form = CourseForm(request.POST)
-        	if form.is_valid():
-            		cd = form.cleaned_data
-            		f = CourseForm(request.POST)
-            		new_course= f.save()
-            		return HttpResponseRedirect("/")
-
-"""
 
 
 def deleteStudent(request):
