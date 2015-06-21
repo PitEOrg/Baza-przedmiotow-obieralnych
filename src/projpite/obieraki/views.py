@@ -15,9 +15,8 @@ from django.contrib.auth.models import Group
 
 def main_site(request):
 	if request.user.is_authenticated():
-		if request.user.username == 'admin':
+		if request.user.is_superuser:
 			return render(request, 'admin/index_admin.html',{})
-
 		elif request.user.groups.filter(name='Student').exists():
 			try:
 				st = Student.objects.get(user=request.user)
@@ -30,8 +29,6 @@ def main_site(request):
 				return render(request, 'Staff/index_staff.html', {'staff': st})
 			except Staff.DoesNotExist:
 				return render(request, 'Staff/index_staff_no_acc.html', {})
-		elif request.user.groups.filter(name='Admin').exists():
-			return render(request, 'Admin/index_admin.html', {})
 		else:
 			return render(request, 'no_acc/index_no_acc.html', {})
 	else:
