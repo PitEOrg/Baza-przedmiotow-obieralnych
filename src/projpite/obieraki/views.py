@@ -244,11 +244,17 @@ def add(request):
 		form = StudentForm(request.POST)
 		if form.is_valid():
 			new_object= form.save()
+			your_user = request.POST['user']
+			g = Group.objects.get(name='Student')
+			g.user_set.add(your_user)
 			return HttpResponseRedirect("/")
 		form = StaffForm(request.POST)
 		if form.is_valid():
 			new_object= form.save()
-			return HttpResponseRedirect("/")
+			your_user = request.POST['user']
+			g = Group.objects.get(name='Staff')
+			g.user_set.add(your_user)
+			return HttpResponseRedirect("/"
 		form = CourseForm(request.POST)
 		if form.is_valid():
 			new_object= form.save()
