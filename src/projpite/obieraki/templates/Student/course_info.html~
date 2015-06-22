@@ -39,7 +39,7 @@
                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="/index/">Homepage</a></li>
-                        <li><a href="/courses/">Courses</a></li>
+                        <li class="active"><a href="/courses/">Courses</a></li>
                         <li><a href="/mycourses/">My Courses</a></li>
                         <li class="active"><a href="/account/">Account Information</a></li>
                         <li><a href="">Logged User: {{student.Name}} {{student.Surname}}</a></li>
@@ -48,19 +48,50 @@
                 </div>
 
                 <div class="col-md-10">
-                    <h2>ACCOUNT INFORMATION</h2>
+                    <h2>Course details</h2>
                     <table class="table">
                     <tbody>
-                    <tr><td>First name:</td><td>{{user.first_name}}</td></tr>
-                    <tr><td>Last name:</td><td>{{user.last_name}}</td></tr>
-                    <tr><td>Private email:</td><td>{{user.email}}</td></tr>
-                    <tr><td>Edu email:</td><td>{{student.Mail}}</td></tr>
-                    <tr><td>Field of study:</td><td>{{student.FieldOfStudy}}</td></tr>
-                    <tr><td>Year:</td><td>{{student.Year_2}}</td></tr>
-                    <tr><td>Semester:</td><td>{{student.Semester}}</td></tr>
-                    <tr><td>Collected ECTS:</td><td>{{student.CollectedECTS}}</td></tr>
+                    <tr><td>Name:</td><td>{{ course.Name }}</td></tr>
+                    <tr><td>ECTS:</td><td>{{ course.ECTS }}</td></tr>
+                    <tr><td>Min Students:</td><td>{{ course.MinStudents }}</td></tr>
+                    <tr><td>Max Students:</td><td>{{ course.MaxStudents }}</td></tr>
+                    <tr><td>Semester:</td><td>{{ course.Semester }}</td></tr>
+                    <tr><td>Teacher:</td><td>{{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</td></tr>
+                    <tr><td>Descrption:</td><td>{{ course.Description }}</td></tr>
+                    <tr><td>Way of getting credit:</td><td>{{ course.WayOfGettingCredit }}</td></tr>
+                    <tr><td>Exam:</td><td>{{ course.Exam }}</td></tr>
                     </tbody>
                     </table>
+                    
+                    
+                    {% for cl in classes %}
+                        <div class="panel panel-default">
+                        
+  								<div class="panel-body">
+  								
+                        
+                        
+                    <table class="table">
+                    <tbody>
+                    <tr><td>Type:</td><td>{{ cl.Class_Type_idClass.Name }}</td></tr>
+                    <tr><td>Min Students:</td><td>{{ cl.Class_Type_idClass.MinStudents }}</td></tr>
+                    <tr><td>Max Students:</td><td>{{ cl.Class_Type_idClass.MaxStudents }}</td></tr>
+                    <tr><td>Teacher:</td><td>{{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff}} </td></tr>
+                    <tr><td>Hours:</td><td>{{ course.Semester }}</td></tr>
+                    </tbody>
+                    </table>
+                        
+                        
+                        
+  								</div>
+  								
+  								<div class="panel-footer">
+  								<button type="button" class="btn btn-primary" href="{% url 'class_add' course.id cl.id %}" >Zapisz</button>
+  								<button type="button" class="btn btn-primary" href="{% url 'class_remove' course.id cl.id %}" >Wypisz</button>
+  								</div>
+
+								</div>
+                    {% endfor %}
                 </div>
 
                 <center>
@@ -117,14 +148,23 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>ACCOUNT INFORMATION</h2>
-			<h3>Imię: {{student.Name}}</h3>
-			<h3>Nazwisko: {{student.Surname}}</h3>
-			<h3>Email: {{student.Mail}}</h3>
-			<h3>Kierunek: {{student.FieldOfStudy}}</h3>
-			<h3>Rok: {{student.Year_2}}</h3>
-			<h3>Semestr: {{student.Semester}}</h3>
-			<h3>Zebrane ECTS: {{student.CollectedECTS}}</h3>
+			<h2>Name: {{ course.Name }}</h2>
+			<h4>ECTS: {{ course.ECTS }}</h4>
+			<h4>MinStudents: {{ course.MinStudents }}</h4>
+			<h4>MaxStudents: {{ course.MaxStudents }}</h4>
+			<h4>Semestr: {{ course.Semester }}</h4>
+			<h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</h4>
+			<h4>Opis: {{ course.Description }}</h4>
+			<h4>Wymagania: {{ course.Requirements }}</h4>
+			<h4>Sposób zaliczenia: {{ course.WayOfGettingCredit }}</h4>
+			<h4>Egzamin: {{ course.Exam }}</h4>
+			{% for cl in classes %}
+			<br />
+			<h4>Zajęcia: {{ cl.Class_Type_idClass.Name }} MinStudents: {{ cl.Class_Type_idClass.MinStudents }} MaxStudents: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
+			<h4>Prowadzący: {{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff.Name }} {{ cl.Staff_idStaff.Surname }} Ilość godzin:{{ cl.Hours }}</h4>
+			<h4><a href="{% url 'class_add' course.id cl.id %}">Zapisz</a></h4>
+			<h4><a href="{% url 'class_remove' course.id cl.id %}">Wypisz</a></h4>
+        		{% endfor %}
 		 </div>
 
 
@@ -137,5 +177,4 @@
 
 
 	</body>
-
 	-->

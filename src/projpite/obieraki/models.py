@@ -6,45 +6,29 @@ from django.contrib.auth.models import User
 # W razie koniecznosci mozna je przywrocic do dzialania
 # TO DO: Mozliwosc stworzenia studenta bez stworzonego jeszcze konta dla niego
 
-class User_2(models.Model): 							#delete
-    Login = models.TextField(unique=True)				#delete
-    Password_2 = models.TextField()					#delete
-    Mail = models.TextField(unique=True)				#delete
-    Permission = models.IntegerField()					#delete
-    #Name = models.TextField()						#delete
-    #Surname = models.TextField()						#delete
-    def __str__(self):								#delete
-        return self.Mail								#delete
-    
     
 class Student(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
-    #User_2_idUser_2 = models.ForeignKey(User_2)
-    Name = models.TextField()
-    Surname = models.TextField()
-    Mail = models.TextField()							#unique
-    FieldOfStudy = models.TextField()					#add wydzial
-    Year_2 = models.IntegerField()						#zmiana nazwy
+    Mail = models.TextField(max_length=30)						
+    FieldOfStudy = models.TextField(max_length=30)				
+    Year_2 = models.IntegerField()						
     Semester = models.IntegerField()
     CollectedECTS = models.IntegerField()
     def __str__(self):
-        return self.Name + ' ' + self.Surname
+        return self.user.first_name.decode("utf-8") + ' ' + self.user.last_name.decode("utf-8")
 
 
 class Staff(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
-    #User_2_idUser_2 = models.ForeignKey(User_2)
-    Name = models.TextField()
-    Surname = models.TextField()
-    Mail = models.TextField()							#unique
-    Title = models.TextField()
-    Department = models.TextField()
+    Mail = models.TextField(max_length=30)							
+    Title = models.TextField(max_length=30)
+    Department = models.TextField(max_length=30)
     def __str__(self):
-        return self.Name + ' ' + self.Surname
+        return self.user.first_name.decode("utf-8") + ' ' + self.user.last_name.decode("utf-8")
 
 
 class Course(models.Model):
-    Name = models.TextField()
+    Name = models.TextField(max_length=30)
     Staff_idStaff = models.ForeignKey(Staff)
     ECTS = models.IntegerField()
     MinStudents = models.IntegerField()
@@ -53,10 +37,8 @@ class Course(models.Model):
     Desription = models.TextField()
     Requirements = models.TextField()
     WayOfGettingCredit = models.TextField()
-    Requirements = models.TextField()					#delete
+    Requirements = models.TextField()					
     Exam = models.BooleanField()
-    #Hours = models.IntegerField()
-    #ID_NO = models.IntegerField()
     def __str__(self):
         return self.Name
 
@@ -74,7 +56,6 @@ class Class(models.Model):
     Class_Type_idClass = models.ForeignKey(Class_Type)
     Staff_idStaff = models.ForeignKey(Staff)
     Hours = models.IntegerField()
-    #Instructor = models.TextField()
     def __str__(self):
         return self.Course_idCourse.Name + ' - ' + self.Class_Type_idClass.Name
 

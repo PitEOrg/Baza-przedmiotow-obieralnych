@@ -35,42 +35,20 @@
             <div class="page-header">
                 <h1>Elective subjects</h1>
             </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/index/">Homepage</a></li>
-                        <li><a href="/courses/">Courses</a></li>
-                        <li class="active"><a href="/mycourses/">My Courses</a></li>
-                        <li><a href="/account/">Account Information</a></li>
-                        <li><a href="">Logged User: {{student.Name}} {{student.Surname}}</a></li>
-                        <li><a href="/logout/">Log out</a></li>
-                    </ul>
-                </div>
-
                 <div class="col-md-10">
-                    <h2>MY COURSES</h2>
-<table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>ECTS</th>
-        <th>Min Students</th>
-        <th>Max Students</th>
-        <th>Semester</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for course in courses %}
-      <tr>
-        <td><a href="{% url 'course_info' course.id %}">{{ course.id }} {{ course.Name }}</td>
-        <td>{{ course.ECTS }}</td>
-        <td>{{ course.MinStudents }}</td>
-        <td>{{ course.MaxStudents }}</td>
-        <td>{{ course.Semester }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+                    <h2>ACCOUNT INFORMATION</h2>
+                    <table class="table">
+                    <tbody>
+                    <tr><td>First name:</td><td>{{user.first_name}}</td></tr>
+                    <tr><td>Last name:</td><td>{{user.last_name}}</td></tr>
+                    <tr><td>Private email:</td><td>{{user.email}}</td></tr>
+                    <tr><td>Edu email:</td><td>{{student.Mail}}</td></tr>
+                    <tr><td>Field of study:</td><td>{{student.FieldOfStudy}}</td></tr>
+                    <tr><td>Year:</td><td>{{student.Year_2}}</td></tr>
+                    <tr><td>Semester:</td><td>{{student.Semester}}</td></tr>
+                    <tr><td>Collected ECTS:</td><td>{{student.CollectedECTS}}</td></tr>
+                    </tbody>
+                    </table>
                 </div>
 
                 <center>
@@ -86,9 +64,7 @@
 
 </html>
 
-
 <!--
-
 <body>
 		<header class="navbar-fixed-top" role="banner" style="background-color:white">
 			<div class="container">
@@ -129,10 +105,14 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>MY COURSES</h2>
-			{% for course in courses %}
-			<h4><a href="{% url 'mycourse_info' course.id %}">{{ course.id }} {{ course.Name }} {{ course.ECTS }} {{ course.MinStudents }} {{ course.MaxStudents }} {{ course.Semester }}</a></h4>
-        		{% endfor %}
+			<h2>ACCOUNT INFORMATION</h2>
+			<h3>Imię: {{student.Name}}</h3>
+			<h3>Nazwisko: {{student.Surname}}</h3>
+			<h3>Email: {{student.Mail}}</h3>
+			<h3>Kierunek: {{student.FieldOfStudy}}</h3>
+			<h3>Rok: {{student.Year_2}}</h3>
+			<h3>Semestr: {{student.Semester}}</h3>
+			<h3>Zebrane ECTS: {{student.CollectedECTS}}</h3>
 		 </div>
 
 
