@@ -16,7 +16,7 @@ from django.contrib.auth.models import Group
 def main_site(request):
 	if request.user.is_authenticated():
 		if request.user.is_superuser:
-			return render(request, 'admin/index_admin.html',{})
+			return render(request, 'admin/index_admin.html',{'user' : request.user})
 		elif request.user.groups.filter(name='Student').exists():
 			try:
 				st = Student.objects.get(user=request.user)
@@ -48,6 +48,8 @@ def account_info(request):
 				return render(request, 'Staff/account_info.html', {'staff': st})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
+		else:
+			return render(request, '404.html', {})
 	else:
 		return render(request, '404.html', {})
 
@@ -66,6 +68,8 @@ def courses(request):
 				return render(request, 'Staff/courses.html', {'staff': st, 'courses': courses})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
+		else:
+			return render(request, '404.html', {})
 	else:
 		return render(request, 'courses.html', {'courses': courses})
 
@@ -85,6 +89,8 @@ def mycourses(request):
 				return render(request, 'Staff/mycourses.html', {'staff': st, 'courses': courses})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
+		else:
+			return render(request, '404.html', {})
 	else:
 		return render(request, '404.html', {})
 
@@ -232,7 +238,7 @@ def register_page(request):
 
 
 def add(request):
-	if request.user.username != 'admin':
+	if not request.user.is_superuser:
 		return render(request, '404.html', {})
 
 	if request.method == 'POST':
@@ -254,7 +260,7 @@ def add(request):
 			your_user = request.POST['user']
 			g = Group.objects.get(name='Staff')
 			g.user_set.add(your_user)
-			return HttpResponseRedirect("/"
+			return HttpResponseRedirect("/")
 		form = CourseForm(request.POST)
 		if form.is_valid():
 			new_object= form.save()
@@ -265,7 +271,7 @@ def add(request):
 			form = formFactory(mhm)
 	else:
 		form = ChooseForm()
-	return render(request, 'admin/add.html', {'form': form})
+	return render(request, 'admin/add.html', {'form': form, 'user':request.user})
 
 
 

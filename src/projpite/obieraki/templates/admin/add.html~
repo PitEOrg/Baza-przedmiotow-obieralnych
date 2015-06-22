@@ -55,7 +55,7 @@
                                     <li><a href="/add/">Add</a></li>
                                     <li><a href="/delete/">Delete</a></li>
 
-                                    <li><a href="">Logged User: {{user.username}}</a></li>
+                                    <li><a href="">Logged User: {{staff.Title}} {{staff.Name}} {{staff.Surname}}</a></li>
                                     <li><a href="/logout/">Log out</a></li>
                                     </ul>
                                 </div>
