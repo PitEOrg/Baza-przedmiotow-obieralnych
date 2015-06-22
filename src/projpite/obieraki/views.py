@@ -230,7 +230,7 @@ def register_page(request):
                     g = Group.objects.get(name='Staff') 
                     g.user_set.add(new_user)
                 except Staff.DoesNotExist:
-                    return HttpResponse("Zly mail")
+                    return HttpResponse("Konto nie przydzielone")
             return HttpResponseRedirect("/index/")
     else:
         form = RegisterForm()

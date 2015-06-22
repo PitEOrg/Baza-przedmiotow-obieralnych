@@ -35,6 +35,18 @@
             <div class="page-header">
                 <h1>Elective subjects</h1>
             </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/index/">Homepage</a></li>
+                        <li><a href="/courses/">Courses</a></li>
+                        <li><a href="/mycourses/">My Courses</a></li>
+                        <li class="active"><a href="/account/">Account Information</a></li>
+                        <li><a href="">Logged User: {{student.user.first_name}} {{student.user.last_name}} ({{student.user.last_login}}) </a></li>
+                        <li><a href="/logout/">Log out</a></li>
+                    </ul>
+                </div>
+
                 <div class="col-md-10">
                     <h2>ACCOUNT INFORMATION</h2>
                     <table class="table">

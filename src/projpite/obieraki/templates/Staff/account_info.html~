@@ -38,14 +38,22 @@
             <div class="row">
                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="/index/">Homepage</a></li>
-                        <li><a href="">Logged User: {{staff.Title}} {{staff.user.first_name}} {{staff.user.last_name}} ({{staff.user.username}}) </a></li>
+                        <li><a href="/index/">Homepage</a></li>
+                        <li><a href="/courses/">Courses</a></li>
+                        <li><a href="/mycourses/">My Courses</a></li>
+                        <li class="active"><a href="/account/">Account Information</a></li>
+                        <li><a href="">Logged User: {{staff.Title}} {{staff.user.first_name}} {{staffuser.last_name}} ({{staff.user.username}}) </a></li>
                         <li><a href="/logout/">Log out</a></li>
                     </ul>
                 </div>
 
                 <div class="col-md-10">
-                    <h2>Twoje konto nauczyciela nie zostało jeszcze zatwierdzone przez administratora.</h2>
+                    <h2>ACCOUNT INFORMATION</h2>
+                    <h3>First name: {{staff.user.first_name}}</h3>
+                    <h3>Last name: {{staff.user.last_name}}</h3>
+                    <h3>Title: {{staff.Title}}</h3>
+                    <h3>Department: {{staff.Department}}</h3>
+                    <h3>Email: {{staff.Mail}}</h3>
                 </div>
 
                 <center>
@@ -84,7 +92,10 @@
 								</div>
 								<div class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
-									<li><a href="">Logged User: {{user.username}}</a></li>
+									<li><a href="/courses/">Courses</a></li>
+									<li><a href="/mycourses/">My Courses</a></li>
+									<li><a href="/account/">Account Information</a></li>
+									<li><a href="">Logged User: {{staff.Title}} {{staff.Name}} {{staff.Surname}}</a></li>
 									<li><a href="/logout/">Log out</a></li>
 									</ul>
 								</div>
@@ -100,7 +111,12 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>Twoje konto nauczyciela nie zostało jeszcze zatwierdzone przez administratora.</h2>
+			<h2>ACCOUNT INFORMATION</h2>
+			<h3>Imię: {{staff.Name}}</h3>
+			<h3>Nazwisko: {{staff.Surname}}</h3>
+			<h3>Tytuł: {{staff.Title}}</h3>
+			<h3>"Department"(?): {{staff.Department}}</h3>
+			<h3>Email: {{staff.Mail}}</h3>
 		 </div>
 
 
@@ -115,3 +131,4 @@
 	</body>
 
 	-->
+

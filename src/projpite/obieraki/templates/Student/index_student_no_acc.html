@@ -39,7 +39,7 @@
                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active"><a href="/index/">Homepage</a></li>
-                        <li><a href="">Logged User: {{user.username}}</a></li>
+                        <li><a href="">Logged User: {{student.user.first_name}} {{student.user.last_name}} ({{student.user.username}}) </a></li>
                         <li><a href="/logout/">Log out</a></li>
                     </ul>
                 </div>
@@ -62,56 +62,3 @@
 
 </html>
 
-<!--
-
-<body>
-		<header class="navbar-fixed-top" role="banner" style="background-color:white">
-			<div class="container">
-
-				<div class="masthead">
-				<h3 class="text-muted">Elective subjects</h3>
-
-					<div class="container">
-						<div class="navbar navbar-inverse navbar-static-top" role="navigation">
-							<div class="container">
-								<div class="navbar-header">
-									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									</button>
-									<a class="navbar-brand" href="/index/">Homepage</a>
-								</div>
-								<div class="navbar-collapse collapse">
-									<ul class="nav navbar-nav">
-									<li><a href="">Logged User: {{user.username}}</a></li>
-									<li><a href="/logout/">Log out</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</header>
-		<br />
-		<br />
-
-		<div class="jumbotron">
-			<h2>Twoje konto studenta nie zostało jeszcze zatwierdzone przez administratora.</h2>
-		 </div>
-
-
-
-		<center>
-			<footer class="navbar-fixed-bottom" style="background-color:white">
-				<p>&copy; 2015 PiTE</p>
-	  		</footer>
-		</center>
-
-
-	</body>
-	-->

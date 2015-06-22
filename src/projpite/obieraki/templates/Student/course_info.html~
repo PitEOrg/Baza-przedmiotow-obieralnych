@@ -76,7 +76,7 @@
                     <tr><td>Type:</td><td>{{ cl.Class_Type_idClass.Name }}</td></tr>
                     <tr><td>Min Students:</td><td>{{ cl.Class_Type_idClass.MinStudents }}</td></tr>
                     <tr><td>Max Students:</td><td>{{ cl.Class_Type_idClass.MaxStudents }}</td></tr>
-                    <tr><td>Teacher:</td><td>{{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff}} </td></tr>
+                    <tr><td>Teacher:</td><td>{{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff }} </td></tr>
                     <tr><td>Hours:</td><td>{{ course.Semester }}</td></tr>
                     </tbody>
                     </table>
@@ -86,8 +86,8 @@
   								</div>
   								
   								<div class="panel-footer">
-  								<button type="button" class="btn btn-primary" href="{% url 'class_add' course.id cl.id %}" >Zapisz</button>
-  								<button type="button" class="btn btn-primary" href="{% url 'class_remove' course.id cl.id %}" >Wypisz</button>
+  								<a type="button" class="btn btn-primary" href="{% url 'class_add' course.id cl.id %}" >Sign up</a>
+  								<a type="button" class="btn btn-primary" href="{% url 'class_remove' course.id cl.id %}" >Sign out</a>
   								</div>
 
 								</div>

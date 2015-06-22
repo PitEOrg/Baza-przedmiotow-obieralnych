@@ -39,7 +39,7 @@
                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active"><a href="/index/">Homepage</a></li>
-                        <li><a href="">Logged User: {{staff.Title}} {{staff.user.first_name}} {{staff.user.last_name}} ({{staff.user.username}}) </a></li>
+                        <li><a href="">Logged User: {{user.username}}</a></li>
                         <li><a href="/logout/">Log out</a></li>
                     </ul>
                 </div>

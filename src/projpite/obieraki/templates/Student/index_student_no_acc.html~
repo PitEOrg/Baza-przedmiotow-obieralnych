@@ -39,13 +39,13 @@
                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active"><a href="/index/">Homepage</a></li>
-                        <li><a href="">Logged User: {{staff.Title}} {{staff.user.first_name}} {{staff.user.last_name}} ({{staff.user.username}}) </a></li>
+                        <li><a href="">Logged User: {{user.username}}</a></li>
                         <li><a href="/logout/">Log out</a></li>
                     </ul>
                 </div>
 
                 <div class="col-md-10">
-                    <h2>Twoje konto nauczyciela nie zostało jeszcze zatwierdzone przez administratora.</h2>
+                    <h2>Twoje konto studenta nie zostało jeszcze zatwierdzone przez administratora.</h2>
                 </div>
 
                 <center>
@@ -58,6 +58,7 @@
         </div>
 
 	</body>
+
 
 </html>
 
@@ -100,7 +101,7 @@
 		<br />
 
 		<div class="jumbotron">
-			<h2>Twoje konto nauczyciela nie zostało jeszcze zatwierdzone przez administratora.</h2>
+			<h2>Twoje konto studenta nie zostało jeszcze zatwierdzone przez administratora.</h2>
 		 </div>
 
 
@@ -113,5 +114,4 @@
 
 
 	</body>
-
 	-->
