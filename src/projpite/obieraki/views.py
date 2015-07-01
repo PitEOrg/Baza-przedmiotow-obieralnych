@@ -199,13 +199,14 @@ def course_info(request, course_id):
 				return render(request, '404.html', {})
 		elif	request.user.groups.filter(name='Staff').exists():
 			try:
+				students = Student_has_Course.objects.filter(Course_idCourse=course)
 				st = Staff.objects.get(user=request.user)
 				if request.method == 'POST':
 					course.Description = request.POST['Description']
 					course.Requirements = request.POST['Requirements']
 					course.WayOfGettingCredit = request.POST['WayOfGettingCredit']
 					course.save()
-				return render(request, 'Staff/course_info.html', {'staff': st, 'course': course, 'classes': classes})
+				return render(request, 'Staff/course_info.html', {'staff': st, 'course': course, 'classes': classes, 'students' : students})
 			except Staff.DoesNotExist:
 				return render(request, '404.html', {})
 	else:

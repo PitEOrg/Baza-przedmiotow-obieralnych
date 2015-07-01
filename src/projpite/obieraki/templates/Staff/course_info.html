@@ -55,22 +55,41 @@
                         <h4>Min Students: {{ course.MinStudents }}</h4>
                         <h4>Max Students: {{ course.MaxStudents }}</h4>
                         <h4>Semester: {{ course.Semester }}</h4>
-                        <h4>Teacher: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</h4>
+                        <h4>Teacher: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.user.first_name }} {{ course.Staff_idStaff.user.last_name }}</h4>
                         <h4>Descrption: {{ course.Description }}</h4>
+                        	{%if course.Staff_idStaff.user == request.user%}
                             <p>Descrption: <textarea name="Description" rows="10" cols="50"></textarea></p>
+                            {% endif %}
                         <h4>Requirements: {{ course.Requirements }}</h4>
+                        {%if course.Staff_idStaff.user == request.user%}
                             <p>Requirements: <textarea name="Requirements" rows="10" cols="50"></textarea></p>
+                            {% endif %}
                         <h4>Way of getting credit: {{ course.WayOfGettingCredit }}</h4>
+                        {%if course.Staff_idStaff.user == request.user%}
                             <p>Way of getting credit: <textarea name="WayOfGettingCredit" rows="10" cols="50"></textarea></p>
+                            {% endif %}
                         <h4>Exam: {{ course.Exam }}</h4>
+                        {%if course.Staff_idStaff.user == request.user%}
                         <input type="submit" value="Submit">
+                        {% endif %}
                     </form>
                     {% for cl in classes %}
-                        <br />
+                        <br/>
                         <h4>Courses: {{ cl.Class_Type_idClass.Name }} Min Students: {{ cl.Class_Type_idClass.MinStudents }} Max Students: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
                         <h4>Teacher: {{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff.Name }} {{ cl.Staff_idStaff.Surname }} Hours:{{ cl.Hours }}</h4>
                     {% endfor %}
+                    
+                    <h2>Students</h2>
+                    {% for student in students%}
+                    		<h4>{{student.Student_idStudent.user.first_name}} {{student.Student_idStudent.user.last_name}}</h4>
+                    {% endfor %}
+                    <br/>
+                    <br/>
                 </div>
+                
+                
+                
+                
 
                 <center>
                     <footer class="navbar-fixed-bottom" style="background-color:white">
@@ -85,82 +104,3 @@
 
 </html>
 
-<!--
-
-<body>
-		<header class="navbar-fixed-top" role="banner" style="background-color:white">
-			<div class="container">
-
-				<div class="masthead">
-				<h3 class="text-muted">Elective subjects</h3>
-
-					<div class="container">
-						<div class="navbar navbar-inverse navbar-static-top" role="navigation">
-							<div class="container">
-								<div class="navbar-header">
-									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									</button>
-									<a class="navbar-brand" href="/index/">Homepage</a>
-								</div>
-								<div class="navbar-collapse collapse">
-									<ul class="nav navbar-nav">
-									<li><a href="/courses/">Courses</a></li>
-									<li><a href="/mycourses/">My Courses</a></li>
-									<li><a href="/account/">Account Information</a></li>
-									<li><a href="">Logged User: {{staff.Title}} {{staff.Name}} {{staff.Surname}}</a></li>
-									<li><a href="/logout/">Log out</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</header>
-		<br />
-		<br />
-
-		<div class="jumbotron">
-		     <form action="" method="post">
-				{% csrf_token %}
-				<h2>Name: {{ course.Name }}</h2>
-				<h4>ECTS: {{ course.ECTS }}</h4>
-				<h4>MinStudents: {{ course.MinStudents }}</h4>
-				<h4>MaxStudents: {{ course.MaxStudents }}</h4>
-				<h4>Semestr: {{ course.Semester }}</h4>
-				<h4>Prowadzący: {{ course.Staff_idStaff.Title }} {{ course.Staff_idStaff.Name }} {{ course.Staff_idStaff.Surname }}</h4>
-				<h4>Opis: {{ course.Description }}</h4>
-					<p>Opis: <textarea name="Description" rows="10" cols="50"></textarea></p>
-				<h4>Wymagania: {{ course.Requirements }}</h4>
-				    <p>Wymagania: <textarea name="Requirements" rows="10" cols="50"></textarea></p>
-				<h4>Sposób zaliczenia: {{ course.WayOfGettingCredit }}</h4>
-					<p>Sposób zaliczenia: <textarea name="WayOfGettingCredit" rows="10" cols="50"></textarea></p>
-				<h4>Egzamin: {{ course.Exam }}</h4>
-				<input type="submit" value="Submit">
-			</form>
-			{% for cl in classes %}
-			<br />
-			<h4>Zajęcia: {{ cl.Class_Type_idClass.Name }} MinStudents: {{ cl.Class_Type_idClass.MinStudents }} MaxStudents: {{ cl.Class_Type_idClass.MaxStudents }}<h4/>
-			<h4>Prowadzący: {{ cl.Staff_idStaff.Title }} {{ cl.Staff_idStaff.Name }} {{ cl.Staff_idStaff.Surname }} Ilość godzin:{{ cl.Hours }}</h4>
-        		{% endfor %}
-		 </div>
-
-
-
-
-		<center>
-			<footer class="navbar-fixed-bottom" style="background-color:white">
-				<p>&copy; 2015 PiTE</p>
-	  		</footer>
-		</center>
-
-
-	</body>
-
-	-->
